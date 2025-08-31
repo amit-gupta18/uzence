@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import DataTable from './components/DataTable'
+import { InputField } from './components/InputField'
 import './App.css'
+// import { useState } from 'storybook/internal/preview-api';
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [value , setValue] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='text-center text-2xl'>
+        This is a react + ts + tw app.
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className='flex flex-col space-y-4 w-lg m-8 border-amber-950 border-2 p-4 rounded-2xl'>
+        <InputField label='name' value={value}  placeholder='Enter your name' onChange={handleInputChange} variant='ghost' size='sm' disabled={true} />
+        <InputField invalid={true} label='place' value={value}  placeholder='Enter your place' onChange={handleInputChange} variant='outlined' size='md' theme='dark' errorMessage='This field is required' />
+        <InputField  label='age' value={value}  placeholder='Enter your age' onChange={handleInputChange} variant='outlined' size='lg' loading={true} />
+        <InputField label='password' type='password' value={value}  placeholder='Enter your password' onChange={handleInputChange} variant='filled' size='lg'  />
+
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <DataTable />
     </>
   )
 }
-
+    
 export default App
+
